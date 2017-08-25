@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <div class="container">
+    <section class="content-header">
+      <h1>
+        Detalles
+        <small>Vehículo: {{ vehiculo.id }} </small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-car"></i> Vehículos</a></li>
+        <li class="active">Detalles</li>
+      </ol>
+    </section>
+      <div class="box">
+          <div class="box-body">
+            <div class="table-responsive">
+              <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ vehiculo.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Patente</th>
+                        <td>{{ vehiculo.patente }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nromotor</th>
+                        <td>{{ vehiculo.nroMotor }}</td>
+                    </tr>
+                    <tr>
+                        <th>Descripcion</th>
+                        <td>{{ vehiculo.descripcion }}</td>
+                    </tr>
+                    <tr>
+                        <th>Color</th>
+                        <td>{{ vehiculo.color }}</td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+          <a class="btn btn-primary" href="{{ path('vehiculo_index') }}"><i class="fa fa-bars"></i>&nbsp;Listado de Vehículos</a>
+          <a class="btn btn-warning btn-sm btn-flat" href="{{ path('vehiculo_edit', { 'id': vehiculo.id }) }}"><i class="fa fa-edit"></i>&nbsp;Editar</a>
+
+          {{ form_start(delete_form) }}
+              <input class="btn btn-danger" type="submit" value="Eliminar">
+          {{ form_end(delete_form) }}
+        </div>
+      </div>
+  </div>
+{% endblock %}

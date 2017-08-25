@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <div class="container">
+      <h1 align="center">Lista de Informes</h1>
+
+      <div class="table-responsive">
+        <table id="tabla" class="table table-striped table-bordered dt-responsive nowrap">
+          <thead>
+              <tr>
+                  <th>Id</th>
+                  <th>Latitud</th>
+                  <th>Longitud</th>
+                  <th>Altitud</th>
+                  <th>Velocidad</th>
+                  <th>Rumbo</th>
+                  <th>Fecha y hora</th>
+                  <th>Acciones</th>
+              </tr>
+          </thead>
+          <tbody>
+          {% for informe in informes %}
+              <tr>
+                  <td><a href="{{ path('informe_show', { 'id': informe.id }) }}">{{ informe.id }}</a></td>
+                  <td>{{ informe.latitud }}</td>
+                  <td>{{ informe.longitud }}</td>
+                  <td>{{ informe.altitud }}</td>
+                  <td>{{ informe.velocidad }}</td>
+                  <td>{{ informe.rumbo }}</td>
+                  <td>{% if informe.fechaYHora %}{{ informe.fechaYHora|date('Y-m-d H:i:s') }}{% endif %}</td>
+                  <td>
+                      <ul>
+                          <li>
+                              <a href="{{ path('informe_show', { 'id': informe.id }) }}">Detalle</a>
+                          </li>
+                          <li>
+                              <a href="{{ path('informe_edit', { 'id': informe.id }) }}">Editar</a>
+                          </li>
+                      </ul>
+                  </td>
+              </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <ul>
+          <li>
+              <a href="{{ path('informe_new') }}">Nuevo Informe</a>
+          </li>
+      </ul>
+  </div>
+{% endblock %}

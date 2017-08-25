@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <div class="container">
+      <h1 align="center">Rastreador</h1>
+
+      <div class="table-responsive">
+        <table class="table">
+          <tbody>
+              <tr>
+                  <th>Id</th>
+                  <td>{{ rastreador.id }}</td>
+              </tr>
+              <tr>
+                  <th>Numero</th>
+                  <td>{{ rastreador.numero }}</td>
+              </tr>
+              <tr>
+                  <th>Descripcion</th>
+                  <td>{{ rastreador.descripcion }}</td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
+
+      <ul>
+          <li>
+              <a href="{{ path('rastreador_index') }}">Regresar a la lista</a>
+          </li>
+          <li>
+              <a href="{{ path('rastreador_edit', { 'id': rastreador.id }) }}">Editar</a>
+          </li>
+          <li>
+              {{ form_start(delete_form) }}
+                  <input type="submit" value="Eliminar">
+              {{ form_end(delete_form) }}
+          </li>
+      </ul>
+  </div>
+{% endblock %}

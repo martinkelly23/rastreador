@@ -1,0 +1,38 @@
+<div class="container">
+    <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info" >
+                <div class="panel-heading">
+                    <div class="panel-title">Crear Cuenta</div>
+                </div>
+
+                <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST">
+
+                    {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'form.email'|trans } }) }}
+                    {{ form_errors(form.email) }}
+
+                    {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'form.username'|trans } }) }}
+                    {{ form_errors(form.username) }}
+
+                    {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'form.password'|trans } }) }}
+                    {{ form_errors(form.plainPassword.first) }}
+
+                    {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'form.password_confirmation'|trans } }) }}
+                    {{ form_errors(form.plainPassword.second) }}
+
+                    <span class="col s12 red-text margin" >{{ form_errors(form.plainPassword.first) }}</span>
+                    <span class="col s12 red-text margin" >{{ form_errors(form.plainPassword.second) }}</span>
+
+                    {{ form_rest(form) }}
+
+                    <div class="input-field col s12 margin">
+                      <input class="btn col s12 grey darken-1" type="submit" value="Crear Cuenta">
+                    </div>
+
+                </form>
+
+                <div class="input-field col s12">
+                  <p class="margin center medium-small sign-up">Ya tienes una cuenta? <a href="{{ path('fos_user_security_login') }}">Iniciar sesión</a></p>
+                </div>
+        </div>
+    </div>
+</div>

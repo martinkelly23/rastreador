@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <div class="container">
+    <section class="content-header">
+      <h1>
+        VEHÍCULOS
+        <small>Listado de Vehículos</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-car"></i> Vehículos</a></li>
+        <li class="active">Listado de vehículos</li>
+      </ol>
+    </section>
+      <div class="box">
+        <div class="box-body">
+      <div class="table-responsive">
+        <table id="tabla" class="table table-striped table-bordered dt-responsive nowrap">
+          <thead>
+              <tr>
+                  <th>Id</th>
+                  <th>Patente</th>
+                  <th>Nromotor</th>
+                  <th>Descripción</th>
+                  <th>Color</th>
+                  <th>Acciones</th>
+              </tr>
+          </thead>
+          <tbody>
+          {% for vehiculo in vehiculos %}
+              <tr>
+                  <td><a href="{{ path('vehiculo_show', { 'id': vehiculo.id }) }}">{{ vehiculo.id }}</a></td>
+                  <td>{{ vehiculo.patente }}</td>
+                  <td>{{ vehiculo.nroMotor }}</td>
+                  <td>{{ vehiculo.descripcion }}</td>
+                  <td>{{ vehiculo.color }}</td>
+                  <td>
+                      <ul>
+                        <div class="tools">
+                                <a class="btn btn-primary btn-sm btn-flat" href="{{ path('vehiculo_show', { 'id': vehiculo.id }) }}"><i class="fa fa-info-circle"></i>&nbsp;Detalles</a>
+                                <a class="btn btn-info btn-sm btn-flat" href="{{ path('vehiculo_track', { 'id': vehiculo.id }) }}"><i class="fa fa-compass"></i>&nbsp;Rastrear</a>
+                                <a class="btn btn-warning btn-sm btn-flat" href="{{ path('vehiculo_edit', { 'id': vehiculo.id }) }}"><i class="fa fa-edit"></i>&nbsp;Editar</a>
+                          </div>
+                      </ul>
+                  </td>
+              </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        </div>
+        </div>
+      </div>
+      <a class="btn btn-success" href="{{ path('vehiculo_new') }}"><i class="fa fa-car"></i>&nbsp;Cargar nuevo vehículo</a>
+  </div>
+
+{% endblock %}

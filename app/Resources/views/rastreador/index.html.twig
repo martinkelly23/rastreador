@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <div class="container">
+      <h1 align="center">Lista de Rastreadores</h1>
+
+      <div class="table-responsive">
+        <table id="tabla" class="table table-striped table-bordered dt-responsive nowrap">
+          <thead>
+              <tr>
+                  <th>Id</th>
+                  <th>Numero</th>
+                  <th>Descripcion</th>
+                  <th>Acciones</th>
+              </tr>
+          </thead>
+          <tbody>
+          {% for rastreador in rastreadors %}
+              <tr>
+                  <td><a href="{{ path('rastreador_show', { 'id': rastreador.id }) }}">{{ rastreador.id }}</a></td>
+                  <td>{{ rastreador.numero }}</td>
+                  <td>{{ rastreador.descripcion }}</td>
+                  <td>
+                      <ul>
+                          <li>
+                              <a href="{{ path('rastreador_show', { 'id': rastreador.id }) }}">Detalle</a>
+                          </li>
+                          <li>
+                              <a href="{{ path('rastreador_edit', { 'id': rastreador.id }) }}">Editar</a>
+                          </li>
+                      </ul>
+                  </td>
+              </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <ul>
+          <li>
+              <a href="{{ path('rastreador_new') }}">Nuevo Rastreador</a>
+          </li>
+      </ul>
+  </div>
+{% endblock %}

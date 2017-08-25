@@ -1,0 +1,17 @@
+h1, h3 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
+}
+
+p, h4, h5, span, th, td {
+  font-family: 'Roboto', sans-serif;
+}
+
+.icon_style{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 15px;
+  color: white;
+  cursor:pointer;
+}
