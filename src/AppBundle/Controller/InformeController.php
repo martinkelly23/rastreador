@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\Informe;
 use AppBundle\Form\InformeType;
 
@@ -26,7 +27,7 @@ class InformeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $informes = $em->getRepository('AppBundle:Informe')->findAll();      
+        $informes = $em->getRepository('AppBundle:Informe')->findAll();
         return $this->render('informe/index.html.twig', array(
             'informes' => $informes,
         ));
@@ -55,6 +56,36 @@ class InformeController extends Controller
         return $this->render('informe/new.html.twig', array(
             'informe' => $informe,
             'form' => $form->createView(),
+        ));
+    }
+
+
+    /**
+     * Creates a new Informe entity.
+     *
+     * @Route("/nuevo", name="informe_nuevo")
+     * @Method({"GET"})
+     */
+    public function nuevoAction(Request $request)  //http://localhost/rastreador/web/app_dev.php/informe/nuevo?latitud=1&longitud=0&altitud=0&velocidad=0&rumbo=0
+    {
+        $informe = new Informe();
+        $em = $this->getDoctrine()->getManager();
+
+        $informe->setLatitud($request->query->get('latitud'));
+        $informe->setLongitud($request->query->get('longitud'));
+        $informe->setAltitud($request->query->get('altitud'));
+        $informe->setVelocidad($request->query->get('velocidad'));
+        $informe->setRumbo($request->query->get('rumbo'));
+
+        $informe->setRastreador($em->getRepository('AppBundle:Rastreador')->find(1)); //enviarle el rastreador tambien por GET
+        $now = new \DateTime('now');
+        $informe->setFechaYHora($now);
+        $em->persist($informe);
+        $em->flush();
+
+        $informes = $em->getRepository('AppBundle:Informe')->findAll();
+        return $this->render('informe/index.html.twig', array(
+            'informes' => $informes,
         ));
     }
 

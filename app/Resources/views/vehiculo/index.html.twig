@@ -37,9 +37,13 @@
                   <td>
                       <ul>
                         <div class="tools">
-                                <a class="btn btn-primary btn-sm btn-flat" href="{{ path('vehiculo_show', { 'id': vehiculo.id }) }}"><i class="fa fa-info-circle"></i>&nbsp;Detalles</a>
+                                {% if is_granted('ROLE_ADMIN')%}
+                                  <a class="btn btn-primary btn-sm btn-flat" href="{{ path('vehiculo_show', { 'id': vehiculo.id }) }}"><i class="fa fa-info-circle"></i>&nbsp;Detalles</a>
+                                {% endif %}
                                 <a class="btn btn-info btn-sm btn-flat" href="{{ path('vehiculo_track', { 'id': vehiculo.id }) }}"><i class="fa fa-compass"></i>&nbsp;Rastrear</a>
-                                <a class="btn btn-warning btn-sm btn-flat" href="{{ path('vehiculo_edit', { 'id': vehiculo.id }) }}"><i class="fa fa-edit"></i>&nbsp;Editar</a>
+                                {% if is_granted('ROLE_ADMIN')%}
+                                  <a class="btn btn-warning btn-sm btn-flat" href="{{ path('vehiculo_edit', { 'id': vehiculo.id }) }}"><i class="fa fa-edit"></i>&nbsp;Editar</a>
+                                {% endif %}
                           </div>
                       </ul>
                   </td>
@@ -50,7 +54,9 @@
         </div>
         </div>
       </div>
-      <a class="btn btn-success" href="{{ path('vehiculo_new') }}"><i class="fa fa-car"></i>&nbsp;Cargar nuevo vehículo</a>
+      {% if is_granted('ROLE_ADMIN')%}
+        <a class="btn btn-success" href="{{ path('vehiculo_new') }}"><i class="fa fa-car"></i>&nbsp;Cargar nuevo vehículo</a>
+      {% endif %}
   </div>
 
 {% endblock %}

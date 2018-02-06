@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+  <head>
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="refresh" content="10">
+  </head>
   <div class="container">
     <section class="content-header">
       <h1>
@@ -55,11 +59,12 @@
 
         <script>
           function myMap() {
-          var mapProp= {
-              center:new google.maps.LatLng({{ informe.latitud }},{{ informe.longitud }}),
-              zoom:17,
-          };
-          var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+            var mapProp= {
+                center:new google.maps.LatLng({{ informe.latitud }},{{ informe.longitud }}),
+                zoom:17,
+            };
+            map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+            marker = new google.maps.Marker({position: new google.maps.LatLng({{ informe.latitud }},{{ informe.longitud }}), map: map });
           }
         </script>
       {% endif %}
